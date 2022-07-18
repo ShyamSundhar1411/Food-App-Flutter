@@ -1,14 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import '../screens/meal_detail_screen.dart';
 import '../models/meal.dart';
 
 class MealDisplayWidget extends StatelessWidget {
   final Meal meal;
   MealDisplayWidget(this.meal);
-  void onTapShowDetail() {
-    print("Hey works");
-  }
 
   String get ComplexityText {
     switch (meal.complexity) {
@@ -26,6 +24,7 @@ class MealDisplayWidget extends StatelessWidget {
         break;
     }
   }
+
   String get AffordabilityText {
     switch (meal.affordability) {
       case Affordability.Affordable:
@@ -42,8 +41,14 @@ class MealDisplayWidget extends StatelessWidget {
         break;
     }
   }
+
   @override
   Widget build(BuildContext context) {
+    void onTapShowDetail() {
+      Navigator.of(context)
+          .pushNamed(MetailDetailScreen.routeName, arguments: {'id':meal.id});
+    }
+
     return InkWell(
       onTap: onTapShowDetail,
       child: Card(

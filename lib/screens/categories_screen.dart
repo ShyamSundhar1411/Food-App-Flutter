@@ -5,11 +5,13 @@ import '../widgets/categoryItemWidget.dart';
 class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('DeliMeals')),body:GridView(
+    return Scaffold(appBar: AppBar(title: const Text('DeliMeals')),
+    body:GridView(
+      padding:const EdgeInsets.all(25),
       children: DUMMY_CATEGORIES
           .map(
             (categoryData) =>
-                CategoryItemWidget(categoryData.title, categoryData.color),
+                CategoryItemWidget(categoryData.id,categoryData.title, categoryData.color),
           )
           .toList(),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

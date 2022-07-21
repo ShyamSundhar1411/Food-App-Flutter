@@ -29,49 +29,59 @@ class MetailDetailScreen extends StatelessWidget {
     final id = routeArgs['id'];
     final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == id);
     return Scaffold(
-        appBar: AppBar(title: Text("${selectedMeal.title}")),
-        body: SingleChildScrollView(
-          child: Column(children: <Widget>[
-            Card(
-              shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),),
-              margin:EdgeInsets.all(10),
-              elevation:5,
-              child:Container(
-                height: 300,
-                width: double.infinity,
-                child: ClipRRect(
-                  borderRadius:BorderRadius.circular(15),
-                  child:Image.network(
-                  selectedMeal.imageUrl,
-                  fit: BoxFit.cover,
-                )))),
-            buildSectionTitle(context, 'Ingredients'),
-            buildContainer(
-                context,
-                ListView.builder(
-                  itemBuilder: (context, index) => Card(
-                      color: Theme.of(context).accentColor,
-                      child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                          child: Text(selectedMeal.ingredients[index]))),
-                  itemCount: selectedMeal.ingredients.length,
-                )),
-            buildSectionTitle(context, 'Steps'),
-            buildContainer(context,
-            ListView.builder(
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      ListTile(
-                        leading: CircleAvatar(child: Text('# ${(index+1)}')),
-                        title: Text(selectedMeal.steps[index]),
-                      ),
-                      Divider(),
-                    ],
-                  ),
-                  itemCount: selectedMeal.steps.length,
-            ))
-          ]),
-        ));
+      appBar: AppBar(title: Text("${selectedMeal.title}")),
+      body: SingleChildScrollView(
+        child: Column(children: <Widget>[
+          Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              margin: EdgeInsets.all(10),
+              elevation: 5,
+              child: Container(
+                  height: 300,
+                  width: double.infinity,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.network(
+                        selectedMeal.imageUrl,
+                        fit: BoxFit.cover,
+                      )))),
+          buildSectionTitle(context, 'Ingredients'),
+          buildContainer(
+              context,
+              ListView.builder(
+                itemBuilder: (context, index) => Card(
+                    color: Theme.of(context).accentColor,
+                    child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        child: Text(selectedMeal.ingredients[index]))),
+                itemCount: selectedMeal.ingredients.length,
+              )),
+          buildSectionTitle(context, 'Steps'),
+          buildContainer(
+              context,
+              ListView.builder(
+                itemBuilder: (context, index) => Column(
+                  children: [
+                    ListTile(
+                      leading: CircleAvatar(child: Text('# ${(index + 1)}')),
+                      title: Text(selectedMeal.steps[index]),
+                    ),
+                    Divider(),
+                  ],
+                ),
+                itemCount: selectedMeal.steps.length,
+              ))
+        ]),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          Navigator.of(context).pop(id);
+        },
+      ),
+    );
   }
 }

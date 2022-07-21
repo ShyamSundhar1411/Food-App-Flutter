@@ -3,6 +3,7 @@ import '../screens/tabs_screen.dart';
 import '../screens/meal_detail_screen.dart';
 import "../screens/categories_screen.dart";
 import "../screens/category_detail_screen.dart";
+import '../screens/filter_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: "DeliMeals",
       theme: ThemeData(
           primarySwatch: Colors.pink,
-          accentColor: Colors.deepOrangeAccent,
+          accentColor: Colors.amberAccent,
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
               bodyText1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => TabScreen(),
         CategoryDetailScreen.routeName: ((ctx) => CategoryDetailScreen()),
         MetailDetailScreen.routeName: (ctx) => MetailDetailScreen(),
+        FilterScreen.routeName: (ctx)=>FilterScreen(),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);

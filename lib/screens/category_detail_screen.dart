@@ -5,6 +5,8 @@ import '../models/meal.dart';
 
 class CategoryDetailScreen extends StatefulWidget {
   static const routeName = '/categorydetails';
+  final List<Meal> availableMeals;
+  CategoryDetailScreen(this.availableMeals);
 
   @override
   State<CategoryDetailScreen> createState() => _CategoryDetailScreenState();
@@ -13,16 +15,25 @@ class CategoryDetailScreen extends StatefulWidget {
 class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
   String categoryTitle;
   List<Meal> displayedMeals;
+  var _loadedInitData = false;
   @override
   void initState() {
-    final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
-    categoryTitle = routeArgs['title'];
-    final categoryId = routeArgs['id'];
-    displayedMeals = DUMMY_MEALS.where((meal) {
-      return meal.categories.contains(categoryId);
-    }).toList();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (!_loadedInitData) {
+      final routeArgs =
+          ModalRoute.of(context).settings.arguments as Map<String, String>;
+      categoryTitle = routeArgs['title'];
+      final categoryId = routeArgs['id'];
+      displayedMeals = widget.availableMeals.where((meal) {
+        return meal.categories.contains(categoryId);
+      }).toList();
+      _loadedInitData = true;
+    }
+    super.didChangeDependencies();
   }
 
   void _removeMeal(String mealId) {
@@ -39,7 +50,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
         appBar: AppBar(title: Text("${categoryTitle}")),
         body: ListView.builder(
           itemBuilder: ((context, index) {
-            return MealDisplayWidget(displayedMeals[index],_removeMeal);
+            return MealDisplayWidget(displayedMeals[index], _removeMeal);
           }),
           itemCount: displayedMeals.length,
         ));

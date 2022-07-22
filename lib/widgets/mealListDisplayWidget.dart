@@ -6,8 +6,7 @@ import '../models/meal.dart';
 
 class MealDisplayWidget extends StatelessWidget {
   final Meal meal;
-  final Function _removeItem;
-  MealDisplayWidget(this.meal, this._removeItem);
+  MealDisplayWidget(this.meal);
 
   String get ComplexityText {
     switch (meal.complexity) {
@@ -48,9 +47,6 @@ class MealDisplayWidget extends StatelessWidget {
     void onTapShowDetail() {
       Navigator.of(context).pushNamed(MetailDetailScreen.routeName,
           arguments: {'id': meal.id}).then((value) {
-        if (value != null) {
-          _removeItem(value);
-        }
       });
     }
 

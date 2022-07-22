@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
 
 class MetailDetailScreen extends StatelessWidget {
+  final Function toggleFavorite;
+  final Function isFavorite;
+  MetailDetailScreen(this.toggleFavorite,this.isFavorite);
   static const routeName = '/meal/detail';
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -77,11 +80,15 @@ class MetailDetailScreen extends StatelessWidget {
         ]),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          Navigator.of(context).pop(id);
-        },
+          child: Icon(
+           isFavorite(id) ? (Icons.star): Icons.star_border,
+          ),
+          onPressed: () {
+            toggleFavorite(id);
+          },
+        backgroundColor: Colors.white,
       ),
+          
     );
   }
 }

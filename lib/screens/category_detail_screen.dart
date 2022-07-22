@@ -50,7 +50,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
         appBar: AppBar(title: Text("${categoryTitle}")),
         body: ListView.builder(
           itemBuilder: ((context, index) {
-            return MealDisplayWidget(displayedMeals[index], _removeMeal);
+            return MealDisplayWidget(displayedMeals[index]);
           }),
           itemCount: displayedMeals.length,
         ));
